@@ -10,7 +10,8 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./owner-edit.component.css']
 })
 export class OwnerEditComponent implements OnInit, OnDestroy {
-owner: any = {};
+
+owner : any = {};
 
 sub: Subscription;
   constructor(private route: ActivatedRoute,
@@ -19,13 +20,14 @@ sub: Subscription;
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      const href = params['href'];
-      if(href){
-        this.ownerService.get(href).subscribe((owner:any) => {
+      const dni = params['dni'];
+      if(dni){
+        this.ownerService.get(dni).subscribe((owner:any) => {
           if (owner) {
-            this.owner = owner;
+            this.owner = owner[0];
+            this.owner.href = owner[0]._links.self.href;
           }else {
-            console.log(`Owner with this ${href} does not exists`);
+            console.log(`Owner with this ${dni} does not exists`);
             this.gotoList();
           }
         });

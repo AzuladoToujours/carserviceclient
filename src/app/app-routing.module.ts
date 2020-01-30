@@ -27,7 +27,7 @@ const routes: Routes = [
     component: OwnerEditComponent 
   },
   {
-    path: 'owner-edit/:href',
+    path: 'owner-edit/:dni',
     component: OwnerEditComponent 
   }
 ];

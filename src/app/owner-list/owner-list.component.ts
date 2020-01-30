@@ -8,7 +8,7 @@ import {OwnerService} from '../shared/owner/owner.service';
   styleUrls: ['./owner-list.component.css']
 })
 export class OwnerListComponent implements OnInit {
-owners : Array <any>;
+  owners : Array <any>;
 
   constructor(private ownerService: OwnerService) { }
 

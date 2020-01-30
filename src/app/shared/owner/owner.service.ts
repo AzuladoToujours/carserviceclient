@@ -10,6 +10,7 @@ import { map } from "rxjs/operators";
 export class OwnerService {
   public API = '//thawing-chamber-47973.herokuapp.com';
   public OWNER_API = this.API + '/owners';
+  public API_SEARCH = this.OWNER_API + '/search/findByDni?dni='
 
   constructor(private http: HttpClient) { 
 }
@@ -22,9 +23,12 @@ getAll(): Observable<Array<any>> {
   }))
 }
 
-get(href: string) {
-  return this.http.get(href);
-}
+get(dni: string){
+    return this.http.get(this.API_SEARCH + dni)
+    .pipe(map((data:any) => {
+       return data._embedded.owners
+    }))
+  }
 
 save(owner: any): Observable<any> {
   let result: Observable<Object>;
