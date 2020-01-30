@@ -22,8 +22,8 @@ getAll(): Observable<Array<any>> {
   }))
 }
 
-get(dni: string) {
-  return this.http.get(this.OWNER_API + '/' + dni);
+get(href: string) {
+  return this.http.get(href);
 }
 
 save(owner: any): Observable<any> {

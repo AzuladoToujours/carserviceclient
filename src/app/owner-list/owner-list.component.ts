@@ -19,10 +19,7 @@ owners : Array <any>;
   }
 
   ngOnInit() {
-    this.ownerService.getAll().subscribe(data=> {
-      this.owners = data;
-      
-    })
+    this.getOwners()
   }
 
 }
