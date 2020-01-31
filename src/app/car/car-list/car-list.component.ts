@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CarService } from '../shared/car/car.service';
-import { GiphyService } from '../shared/giphy/giphy.service';
+import { CarService } from '../../shared/car/car.service';
+import { GiphyService } from '../../shared/giphy/giphy.service';
 
 @Component({
   selector: 'app-car-list',

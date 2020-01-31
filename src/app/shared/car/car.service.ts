@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 export class CarService {
@@ -28,7 +29,34 @@ export class CarService {
     return result;
   }
 
+  saveWithoutOwner(car:any) : Observable<any> {
+        console.log(car)
+    return this.http.put(car.href, car);
+  }
+
   remove(href: string) {
     return this.http.delete(href);
   }
+
+ 
+  removeOwners(owners: Array<String>){
+    this.getAll().toPromise().then(cars => {
+      cars.forEach(car => {
+        owners.forEach(owner => {
+          if (car.ownerDni == owner){
+           const newCar = {
+             href : `https:${this.CAR_API}/${car.id}`,
+             name : `${car.name}`,
+             ownerDni : null
+           }
+           this.saveWithoutOwner(newCar).subscribe();
+          }
+        })
+      });
+    })
+   
+  }
+
+  
+  
 }

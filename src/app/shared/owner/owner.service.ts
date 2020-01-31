@@ -44,4 +44,13 @@ remove(href: string) {
   return this.http.delete(href);
 }
 
+removeList(owners: Array<String>){
+  owners.forEach(owner => {
+    this.get(String(owner)).toPromise().then(apiOwner => {
+      const href = apiOwner[0]._links.owner.href;
+      return this.remove(href).subscribe();
+    })
+  });
+}
+
 }

@@ -5,14 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { CarListComponent } from './car-list/car-list.component';
+import { CarListComponent } from './car/car-list/car-list.component';
 
 import { MatButtonModule, MatCardModule, MatInputModule, MatListModule, MatToolbarModule, MatSelectModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CarEditComponent } from './car-edit/car-edit.component';
+import { CarEditComponent } from './car/car-edit/car-edit.component';
 import { FormsModule } from '@angular/forms';
-import { OwnerListComponent } from './owner-list/owner-list.component';
-import { OwnerEditComponent } from './owner-edit/owner-edit.component';
+import { OwnerListComponent } from './owner/owner-list/owner-list.component';
+import { OwnerEditComponent } from './owner/owner-edit/owner-edit.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { OwnerEditComponent } from './owner-edit/owner-edit.component';
     CarListComponent,
     CarEditComponent,
     OwnerListComponent,
-    OwnerEditComponent
+    OwnerEditComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
