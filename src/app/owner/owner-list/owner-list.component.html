@@ -15,8 +15,8 @@
       <p style= "color:blue; font-size: 20px;"  *ngIf="message">{{message}}</p>
     </mat-card-content>
     <mat-card-actions>
-      <a mat-raised-button color="warn"  (click)="removeListOfOwners()"
-                    *ngIf="selectedOptions" type="button">Delete</a>
+      <button mat-raised-button color="warn"  (click)="removeListOfOwners()"
+                    *ngIf="selectedOptions">Delete</button>
     </mat-card-actions>
-    <button mat-fab color="primary" [routerLink]="['/owner-add']">Add</button>
+    <button mat-fab color="primary" [routerLink]="'/owner-add'">Add</button>
   </mat-card>

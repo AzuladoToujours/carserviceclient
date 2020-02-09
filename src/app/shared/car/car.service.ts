@@ -30,7 +30,6 @@ export class CarService {
   }
 
   saveWithoutOwner(car:any) : Observable<any> {
-        console.log(car)
     return this.http.put(car.href, car);
   }
 
@@ -40,7 +39,7 @@ export class CarService {
 
  
   removeOwners(owners: Array<String>){
-    this.getAll().toPromise().then(cars => {
+    this.getAll().subscribe(cars => {
       cars.forEach(car => {
         owners.forEach(owner => {
           if (car.ownerDni == owner){

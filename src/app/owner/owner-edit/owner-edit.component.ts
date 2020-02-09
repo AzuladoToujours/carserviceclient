@@ -19,6 +19,14 @@ sub: Subscription;
               private ownerService: OwnerService,) { }
 
   ngOnInit() {
+    this.getOwner()
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
+
+  getOwner() {
     this.sub = this.route.params.subscribe(params => {
       const dni = params['dni'];
       if(dni){
@@ -33,10 +41,6 @@ sub: Subscription;
         });
       }
     });
-  }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe();
   }
 
   gotoList() {

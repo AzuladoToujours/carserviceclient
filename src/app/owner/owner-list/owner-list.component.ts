@@ -3,6 +3,7 @@ import { OwnerService } from '../../shared/owner/owner.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CarService } from  '../../shared/car/car.service';
+import { async } from '@angular/core/testing';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { CarService } from  '../../shared/car/car.service';
   styleUrls: ['./owner-list.component.css']
 })
 export class OwnerListComponent implements OnInit {
-  owners : Array <any>;
+  owners = [];
   selectedOwners = [];
   message : any;
 
@@ -20,7 +21,7 @@ export class OwnerListComponent implements OnInit {
     ) { }
 
   getOwners() {
-    this.ownerService.getAll().subscribe(data=> {
+    this.ownerService.getAll().subscribe( data => {
       this.owners = data;
     })
   }
@@ -29,11 +30,30 @@ export class OwnerListComponent implements OnInit {
     this.selectedOwners = $event;
   }
 
+  removeOwnersFromArray() {
+    for (var i=0; i < this.selectedOwners.length; i++){
+      for (var j=0; j < this.owners.length; j++){
+        if (this.owners[j].dni == this.selectedOwners[i]){
+          this.owners.splice(j, 1)
+        }
+      }
+    }
+  }
+
+  updateCars(){
+    this.carService.removeOwners(this.selectedOwners);
+  }
+
+  removeOwners(){
+    this.ownerService.removeList(this.selectedOwners);
+  }
+
   removeListOfOwners(){
    if (this.selectedOwners[0]){
-    this.carService.removeOwners(this.selectedOwners);
-    this.ownerService.removeList(this.selectedOwners);
-    this.message = "Please reload/refresh the page"
+    this.updateCars();
+    this.removeOwners();
+    this.removeOwnersFromArray();
+    this.message = "Owners Deleted Succesfully"
    } else {
      this.message = "There are no owners to delete";
    }

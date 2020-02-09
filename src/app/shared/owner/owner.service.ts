@@ -44,13 +44,17 @@ remove(href: string) {
   return this.http.delete(href);
 }
 
-removeList(owners: Array<String>){
+ removeList(owners: Array<string>): Observable<Array<any>>{
   owners.forEach(owner => {
-    this.get(String(owner)).toPromise().then(apiOwner => {
-      const href = apiOwner[0]._links.owner.href;
-      return this.remove(href).subscribe();
-    })
+    this.get(owner).subscribe(res => {
+      const href = res[0]._links.owner.href;
+      this.remove(href).subscribe();
   });
-}
+});
+    return this.getAll()
+ }
+  
+
+
 
 }
